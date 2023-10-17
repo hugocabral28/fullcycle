@@ -5,7 +5,7 @@ services:
   nodeAplication:
     build:
       context: ./app-node      
-    image: hugocabral28/node:prd
+    image: hugocabral28/nodeapp
     container_name: nodeApp
     hostname: nodejsserver
     networks:
@@ -15,7 +15,7 @@ services:
   nginx:
     build: 
       context: ./nginx
-    image: hugocabral28/nginx:prd
+    image: hugocabral28/nginx-proxy-reverso
     container_name: nginx
     hostname: nginx
     networks:
