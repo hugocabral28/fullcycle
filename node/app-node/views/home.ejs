@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>Full Cycle</title>
+    </head>    
+    <body>
+        <h1>Full Cycle Rocks!</h1>
+        <% if (message != null){ %>
+            <h3>Nome: <%= message[0].name %> Cadastrado!</h3>
+        <%}%>
+        <form action="/" method="post">
+            <div>
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name"/>
+                <button type="submit">Cadastrar</button>
+            </div>            
+        </form>
+    <% if (pessoas.length > 0) { %>
+        <h3>Lista de nomes cadastrada no banco de dados.</h3>
+        <% for(var i=0; i < pessoas.length; i++) {%>
+            <ul style="list-style-type:none;">
+                <li><%= pessoas[i].name %></li>
+            </ul>
+        <% } %>
+    <% } %>       
+    </body>
+</html>
