@@ -6,11 +6,19 @@ services:
     build:
       context: ./app-node      
     image: hugocabral28/nodeapp
-    container_name: nodeApp
+    #Comando para dar start na aplicação
+    command: npm start
+    container_name: nodeApp    
     hostname: nodejsserver
+    #Verificar se o DB já foi finalizado
+    entrypoint: dockerize -wait tcp://db:3306 -timeout 20s docker-entrypoint.sh
+    volumes: 
+      - ./app-node:/usr/src/app-node
     networks:
       - nodenet
-    #tty: true
+    tty: true
+    depends_on:
+      - db
 
   nginx:
     build: 
@@ -20,11 +28,32 @@ services:
     hostname: nginx
     networks:
       - nodenet
-    #tty: true
+    tty: true
     ports:
       - "8080:80"
     depends_on:
       - nodeAplication
+
+  db:
+    image: mysql:5.7
+    command: --innodb-use-native-aio=0
+    container_name: db
+    #Caso o container cair, será restartado automaticamente
+    restart: always
+    #É o mesmo que escrever -t no comando docker
+    tty: true
+    hostname: db
+    #Copia da pasta msql para /var/lib/mysql do container
+    volumes: 
+      - ./mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    #Variaveis de ambientes
+    environment:
+      - MYSQL_DATABASE=dbnodeapp
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - nodenet
 
 networks:
   nodenet:
