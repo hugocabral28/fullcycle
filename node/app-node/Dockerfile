@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:slim AS nodeBuilder
 
 WORKDIR /usr/src/app-node
 
