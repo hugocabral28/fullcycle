@@ -1,6 +1,8 @@
 const querys = require('../querys');
 
 exports.get = async (req, res) => {
+    await querys.getCreateTablePersons();
+    
     const query = await querys.getAllPersons();
     
     res.render('home', {               

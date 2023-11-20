@@ -16,11 +16,11 @@
         </form>
     <% if (pessoas.length > 0) { %>
         <h3>Lista de nomes cadastrada no banco de dados.</h3>
-        <% for(var i=0; i < pessoas.length; i++) {%>
-            <ul style="list-style-type:none;">
-                <li><%= pessoas[i].name %></li>
-            </ul>
-        <% } %>
+        <ul style="list-style-type:none;">
+            <% for(var i=0; i < pessoas.length; i++) {%>
+            <li><%= pessoas[i].name %></li>
+            <% } %>
+        </ul>
     <% } %>       
     </body>
 </html>
